@@ -1,0 +1,114 @@
+<app-header></app-header>
+<div class="wrapper">
+  <div class="page-header">
+    <img class="shapes circle" src="assets/img/cercuri.png" />
+
+    <i class="
+      fa fa-bed shapes large"></i>
+ 
+    <div class="content-center card searchcomponent">
+      <!-- <center> <hr class="line-danger" /></center> -->
+      <h3>Book Your Hotel Today</h3>
+
+      <form>
+        <div class="row">
+          <div class="col-8">
+            <input type="text" class="form-control" placeholder="Enter the City Name" [(ngModel)]="city" name="city" />
+            <br />
+          </div>
+
+          <div class="col-3">
+            <input type="text" placeholder="From - To" class="form-control" bsDaterangepicker [bsConfig]="{ isAnimated: true, containerClass: 'theme-default' }"
+              data-container="body" tooltip="Date of Journey" />
+          </div>
+          <div class="col-1">
+            <button class="btn btn-danger btn-fab btn-icon btn-round btn-sm" data-animation="true" data-container="body" placement="right"
+              (click)="enableHotellist()" tooltip="Search">
+              <i class="tim-icons icon-zoom-split"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-3">
+        <app-filter-sidenav></app-filter-sidenav>
+      </div>
+
+      <div class="col-9">
+        <section>
+          <div class="container-fluid">
+            <div class="card"  *ngFor="let d of hoteldata">
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="{{d.images[0]}}" class="img-fluid" />
+                  <div class="hotel-desc container">
+                    <div class="row">
+                      <div col-4 space>
+                        <span class="card-text">Price</span>
+                        <h3 class="card-title price" style="font-weight: bold;">
+                          &#x20B9; {{d.price}}
+                        </h3>
+                        <span class="card-text perroom">per room/per night</span>
+                      </div>
+
+                      <div class="col-1"></div>
+                      <div class="col">
+                        User Rating
+                        <br />
+                        <star-rating value="{{d.reviewRating}}" totalstars="5" checkedcolor="yellow" uncheckedcolor="grey" size="20px" readonly="true"></star-rating>
+                        <span class="card-text perroom">{{d.reviewCount}} reviews</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8 px-3">
+                  <div class="card-block px-3">
+                    <div class="inline">
+                      <star-rating value="3" totalstars="3" checkedcolor="yellow" uncheckedcolor="black" size="20px" readonly="true"></star-rating>
+                      <span class=" badge badge-info">
+                        {{d.propertyType}}
+                      </span>
+                    </div>
+                    <h3 class="card-title hotelname" style="text-transform: uppercase;font-weight: bold;">
+                      {{d.propertyName}}
+                    </h3>
+                    <p class="card-text place">
+                      {{d.address}}
+                    </p>
+                    <div class="facillities">
+                      <div *ngFor="let f of d.facilities">
+                        <p class="card-text">
+                          {{f}}
+                        </p>
+
+                      </div>
+
+                    </div>
+                    
+
+                    <a class="btn btn-info btn-sm btn-modal" [routerLink]="['/errorpage']">
+                      Read More
+                    </a>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+        </section>
+
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div>
+    <app-footer></app-footer>
+  </div>
